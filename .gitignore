@@ -1,0 +1,11 @@
+# MacOS
+.DS_Store
+.cache
+
+# Build system (CMake)
+build*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
