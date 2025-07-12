@@ -1,3 +1,4 @@
+#include <chrono>
 #include <fcntl.h>
 #include <iostream>
 #include <unistd.h>
@@ -15,7 +16,7 @@ void run_syscall_benchmark(int iterations = 1000000) {
 
     auto start = high_resolution_clock::now();
 
-    for (size_t i = 0; i < iterations; ++i) {
+    for (int i = 0; i < iterations; ++i) {
         if (write(fd, &byte, 1) != 1) {
             std::cerr << "Write failed at iteration " << i << "\n";
             break;
@@ -28,5 +29,5 @@ void run_syscall_benchmark(int iterations = 1000000) {
     auto   total_ns = duration_cast<nanoseconds>(end - start).count();
     double avg_ns   = static_cast<double>(total_ns) / iterations;
 
-    std::cout << "[syscall] write(1 byte to /dev/null): " << avg_ns << " ns\n";
+    std::cout << "[latency][syscall] write (1 byte to /dev/null): " << avg_ns << " ns\n";
 }
