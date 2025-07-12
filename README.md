@@ -1,4 +1,6 @@
-# lmaobench
+![logo](docs/lmaobench.jpg)
+
+---
 
 lmaobench is a microbenchmarking tool loosely based on the [lmbench paper](https://lmbench.sourceforge.net/lmbench-usenix.pdf).  
 It measures things like system call latency, memory access time, context switches and more — probably incorrectly, but fast.
