@@ -7,10 +7,10 @@
 
 using namespace std::chrono;
 
-std::atomic<bool> signal_recieved{false};
+std::atomic<bool> signal_received{false};
 
 void signal_handler(int signum) {
-    signal_recieved.store(true, std::memory_order_relaxed);
+    signal_received.store(true, std::memory_order_relaxed);
 }
 
 void run_signal_benchmark(int iterations = 1000000) {
@@ -33,15 +33,20 @@ void run_signal_benchmark(int iterations = 1000000) {
 
     std::cout << "[latency][signal] sigaction: " << avg_ns << " ns\n";
 
+    if (sigaction(SIGUSR1, &act, nullptr) < 0) {
+        perror("Final signal handler install failed");
+        return;
+    }
+
     start = high_resolution_clock::now();
 
     for (int i = 0; i < iterations; ++i) {
-        signal_recieved.store(false, std::memory_order_relaxed);
+        signal_received.store(false, std::memory_order_relaxed);
         if (kill(getpid(), SIGUSR1) < 0) {
             perror("Failure in sending signal");
+            return;
         }
-        while (!signal_recieved.load(std::memory_order_relaxed))
-            ;
+        while (!signal_received.load(std::memory_order_relaxed));
     }
 
     end = high_resolution_clock::now();

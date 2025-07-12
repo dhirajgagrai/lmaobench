@@ -4,6 +4,7 @@ AlignConsecutiveAssignments:
   AlignCompound: true
 AlignConsecutiveDeclarations: true
 AllowShortFunctionsOnASingleLine: false
+AllowShortLoopsOnASingleLine: true
 ColumnLimit: 100
 IndentAccessModifiers: true
 IndentCaseLabels: true
