@@ -12,12 +12,12 @@ void run_syscall_benchmark(int iterations = 1000000) {
         return;
     }
 
-    char byte = 'x';
+    uint64_t word = 0xFFFFFFFFFFFFFFFF;
 
     auto start = high_resolution_clock::now();
 
     for (int i = 0; i < iterations; ++i) {
-        if (write(fd, &byte, 1) != 1) {
+        if (write(fd, &word, 1) != 1) {
             std::cerr << "Write failed at iteration " << i << "\n";
             break;
         }
@@ -29,5 +29,5 @@ void run_syscall_benchmark(int iterations = 1000000) {
     auto   total_ns = duration_cast<nanoseconds>(end - start).count();
     double avg_ns   = static_cast<double>(total_ns) / iterations;
 
-    std::cout << "[latency][syscall] write (1 byte to /dev/null): " << avg_ns << " ns\n";
+    std::cout << "[latency][syscall] entry (write 1 word to /dev/null): " << avg_ns << " ns\n";
 }
