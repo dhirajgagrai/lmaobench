@@ -8,7 +8,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/build/bin")
 file(
     GLOB_RECURSE BENCH_SOURCES
     CONFIGURE_DEPENDS
-    benchmarks/*.cpp
+    src/benchmarks/*.cpp
 )
 
 add_executable(
