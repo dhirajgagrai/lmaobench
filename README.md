@@ -7,3 +7,10 @@ It measures things like system call latency, memory access time, context switche
 
 Useful if you enjoy watching stats and numbers go brrr and pretending it means something.
 
+## Compile
+
+```sh
+cmake .
+make
+```
+
